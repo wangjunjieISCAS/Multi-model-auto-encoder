@@ -94,16 +94,18 @@ class Document2Vec:
         sentence_vecs = sen2vec.sentence_to_vec(sentence_list, embedding_size)
         return sentence_vecs   
     
-    def predict_text2vec_obtain_text_source (self):
+    def predict_text2vec_obtain_text_source (self):        
         sentence_list = self.obtain_sentence_list( )
         sentence_vecs, zero_len_list = self.predict_sentence2vec(sentence_list, 200)
         np.savetxt('data/textInput.txt', sentence_vecs)
-        
+        np.save('data/zeroLenList.npy', zero_len_list)
         return zero_len_list
     
 
 doc2vec = Document2Vec()   
 zero_len_list = doc2vec.predict_text2vec_obtain_text_source()
+temp = np.load('data/zeroLenList.npy')
+print temp
 
 #doc2vec = Document2Vec()           
 #sentence_list = doc2vec.obtain_sentence_list( )
