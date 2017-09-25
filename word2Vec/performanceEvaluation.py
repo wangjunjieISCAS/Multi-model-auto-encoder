@@ -165,7 +165,7 @@ class PerformanceEvaluation:
 
                
 evaluation = PerformanceEvaluation()
-evaluation.obtain_true_labels( "data/true_in.csv", "data/true_labels.txt")
+#evaluation.obtain_true_labels( "data/true_in.csv", "data/true_labels.txt")
 evaluation.generate_prediction_labels ( "data/report_vector.txt", "data/predict_labels.txt" )
 
 evaluation.compute_performance ( "data/true_labels.txt", "data/predict_labels.txt"  )
