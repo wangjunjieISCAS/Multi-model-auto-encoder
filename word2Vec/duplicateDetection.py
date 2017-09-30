@@ -21,9 +21,18 @@ class DuplicationDetection:
             print ( "vector1 size is not equal with vector2 size!")
             return
         
-        for i in range( len(vector1)):
-            value1 = float(vector1[i])
-            value2 = float(vector2[i])
+        #print len(vector1)
+        vector_len = len(vector1)
+        if ( vector1[vector_len-1] == ' ' or vector1[vector_len-1] == '\n') :
+            vector_len = len(vector1)-1
+        
+        for i in range(  vector_len ):
+            #print 'vector1 '  + "|"
+            #print vector1[i]
+            #print "|"
+            
+            value1 = float( vector1[i] )
+            value2 = float ( vector2[i] )
            
             multiply += value1 * value2
             
@@ -96,8 +105,8 @@ report_vector_file = "data/report_vector.txt"
 predict_labels_file = "data/predict_labels.txt"
 
 detection = DuplicationDetection()
-vector_dict = detection.load_report_vectors( report_vector_file )
-detection.detect_duplicate_report_for_project ( vector_dict, predict_labels_file)
+#vector_dict = detection.load_report_vectors( report_vector_file )
+#detection.detect_duplicate_report_for_project ( vector_dict, predict_labels_file)
 
 #print dic
 # ['a', 'b', 'c']

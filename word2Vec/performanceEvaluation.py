@@ -75,6 +75,8 @@ class PerformanceEvaluation:
         
         recall_1_list = []
         recall_2_list = []
+        recall_3_list = []
+        recall_4_list= []
         average_precision_list = []
         first_index_list= []
         valid_num = 0
@@ -94,10 +96,31 @@ class PerformanceEvaluation:
                 if dup in trues:
                     recall = 1.0
                     break
+                if i >= 1:
+                    break;
+            
+            recall_1_list.append (recall)
+            
+            recall = 0.0
+            for i in range(len(predicts)):
+                dup = predicts[i]
+                if dup in trues:
+                    recall = 1.0
+                    break
+                if i >= 3:
+                    break;
+            recall_2_list.append (recall)
+            
+            recall = 0.0
+            for i in range(len(predicts)):
+                dup = predicts[i]
+                if dup in trues:
+                    recall = 1.0
+                    break
                 if i >= 5:
                     break;
                 
-            recall_1_list.append (recall)
+            recall_3_list.append (recall)
             
             recall = 0.0
             for i in range(len(predicts)):
@@ -108,7 +131,7 @@ class PerformanceEvaluation:
                 if i >= 10:
                     break;
                 
-            recall_2_list.append (recall)
+            recall_4_list.append (recall)
             
             precision_total = 0.0
             for i in range(len(trues)):
@@ -142,20 +165,29 @@ class PerformanceEvaluation:
         result = {}
         recall_1_total = 0.0
         recall_2_total = 0.0
+        recall_3_total = 0.0
+        recall_4_total = 0.0
         MAPTotal = 0.0
         MRRTotal = 0.0
         for i in range(len(recall_1_list)):
             recall_1_total += recall_1_list[i]
             recall_2_total += recall_2_list[i]
+            recall_3_total += recall_3_list[i]
+            recall_4_total += recall_4_list[i]
             
             MAPTotal += average_precision_list[i]
             MRRTotal += first_index_list[i]
-            
-        result["recall-5"] = recall_1_total / valid_num
-        result["recall-10"] = recall_2_total / valid_num
+        
+        
+        result['recall-1'] = recall_1_total / valid_num
+        result['recall-3'] = recall_2_total / valid_num
+        result["recall-5"] = recall_3_total / valid_num
+        result["recall-10"] = recall_4_total / valid_num
         result["MAP"] = MAPTotal / valid_num
         result["MRR"] = MRRTotal / valid_num
         
+        print result["recall-1"]
+        print result["recall-3"] 
         print result["recall-5"]
         print result["recall-10"] 
         print result["MAP"]
@@ -166,6 +198,6 @@ class PerformanceEvaluation:
                
 evaluation = PerformanceEvaluation()
 #evaluation.obtain_true_labels( "data/true_in.csv", "data/true_labels.txt")
-evaluation.generate_prediction_labels ( "data/report_vector.txt", "data/predict_labels.txt" )
+#evaluation.generate_prediction_labels ( "data/report_vector.txt", "data/predict_labels.txt" )
 
-evaluation.compute_performance ( "data/true_labels.txt", "data/predict_labels.txt"  )
+#evaluation.compute_performance ( "data/true_labels.txt", "data/predict_labels.txt"  )

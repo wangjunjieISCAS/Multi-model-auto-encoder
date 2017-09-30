@@ -25,7 +25,7 @@ word_embedding_zero_line_file = 'data/zeroLenListTest.npy'
 
 word_embedding_total_out_file = 'data/testTextInputTotal.txt'
 
-embedding_size = 200
+embedding_size = 30
 
 zero_len_list = doc2vec.predict_text2vec_obtain_text_source( embedding_size, word2vec_train_file, word2vec_model_file, word_vector_input_file, word_embedding_out_file, word_embedding_zero_line_file )
 
